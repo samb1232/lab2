@@ -1,0 +1,33 @@
+name: Main build
+
+on:
+  push:
+    branches:
+      - main
+    tags:
+      - "main"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      packages: write
+      contents: read
+      attestations: write
+      id-token: write
+    steps:
+      - name: Checkout action
+        uses: actions/checkout@v2
+
+      - name: Login Docker Hub action
+        uses: docker/login-action@v1
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD_TOKEN }}
+
+      - name: Build and push
+        uses: docker/build-push-action@v4
+        with:
+          context: .
+          push: true
+          tags: samb1232/test_app:latest
