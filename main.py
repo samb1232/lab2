@@ -1,8 +1,7 @@
 
-def test_function():
-    print('This is a test finction')
+def demo():
+    print('Hello from lab PI')
 
 
 if __name__ == "__main__":
-    test_function()
-    
+    demo()
